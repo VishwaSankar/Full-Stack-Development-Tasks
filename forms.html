@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Web Form</title>
+  <style>
+    .error {
+      color: rgba(47, 194, 60, 0.76);
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Simple Web Form</h1>
+  <form action="#" method="post">
+    <!-- Text Input -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+
+    <!-- Password Input -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+
+    <!-- Checkbox -->
+    <label for="subscribe">Subscribe to Netflix Yearly Plan:</label>
+    <input type="checkbox" id="subscribe" name="subscribe">
+    <br>
+
+    <!-- Radio Buttons -->
+    <label>Select the Gender:</label>
+    <input type="radio" id="male" name="gender" value="male" required>
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="female" required>
+    <label for="female">Female</label>
+    <br>
+
+    <!-- Dropdown -->
+    <label for="country">Select the Country:</label>
+    <select id="country" name="country" required>
+      <option value="">-- Select Country --</option>
+      <option value="India">India</option>
+      <option value="USA">USA</option>
+      <option value="Paris">Paris</option>
+      <option value="Australia">Australia</option>
+    </select>
+    <br>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
