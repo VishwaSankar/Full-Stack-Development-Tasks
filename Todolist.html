@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .todo-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #97e3f2;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .todo-item:last-child {
+            border-bottom: none;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .remove-btn {
+            background-color: #ff5047;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #ff4d4d;
+        }
+
+        #taskInput {
+            width: 70%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #addBtn {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #5cad5e;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #addBtn:hover {
+            background-color: #46a552;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h2>To-Do List</h2>
+        <div>
+            <input type="text" id="taskInput" placeholder="Enter task">
+            <button id="addBtn" onclick="addTask()">Add</button>
+        </div>
+        <div id="taskList"></div>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+
+            if (taskText === '') {
+                alert('Please enter a task to be added!');
+                return;
+            }
+
+            const taskList = document.getElementById('taskList');
+            const taskItem = document.createElement('div');
+            taskItem.classList.add('todo-item');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.addEventListener('change', markAsDone);
+
+            const taskLabel = document.createElement('label');
+            taskLabel.textContent = taskText;
+
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.classList.add('remove-btn');
+            removeBtn.addEventListener('click', removeTask);
+
+            taskItem.appendChild(checkbox);
+            taskItem.appendChild(taskLabel);
+            taskItem.appendChild(removeBtn);
+            taskList.appendChild(taskItem);
+
+            taskInput.value = '';
+        }
+
+        function markAsDone(event) {
+            const taskLabel = event.target.nextSibling;
+            if (event.target.checked) {
+                taskLabel.style.textDecoration = 'line-through';
+            } else {
+                taskLabel.style.textDecoration = 'none';
+            }
+        }
+
+        function removeTask(event) {
+            const taskItem = event.target.parentElement;
+            taskItem.remove();
+        }
+    </script>
+</body>
+</html>

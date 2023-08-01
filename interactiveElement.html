@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Elements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #706c6c;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #d6c3c3;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        #colorChangeText {
+            font-size: 24px;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        #colorPicker {
+            margin-bottom: 10px;
+        }
+
+        #textInput {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            flex: 1;
+        }
+
+        #submitBtn {
+            background-color: #4c8bf5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #submitBtn:hover {
+            background-color: #3c72dc;
+        }
+
+        #displayText {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .info {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Interactive Color Change</h2>
+        <p id="colorChangeText">Click the button to change the color of this text</p>
+        <button id="changeColorBtn">Change Color</button>
+        <input type="color" id="colorPicker">
+        <p class="info">or manually select the color above</p>
+
+        <h2>Interactive Form</h2>
+        <form id="inputForm">
+            <input type="text" id="textInput" placeholder="Enter some text" required>
+            <input type="color" id="textColorPicker">
+            <button type="submit" id="submitBtn">Submit</button>
+        </form>
+
+        <div id="displayText"></div>
+    </div>
+
+    <script>
+        // Color Change Button
+        const colorChangeText = document.getElementById('colorChangeText');
+        const changeColorBtn = document.getElementById('changeColorBtn');
+        const colorPicker = document.getElementById('colorPicker');
+
+        changeColorBtn.addEventListener('click', () => {
+            const randomColor = getRandomColor();
+            colorChangeText.style.color = randomColor;
+        });
+
+        colorPicker.addEventListener('change', () => {
+            colorChangeText.style.color = colorPicker.value;
+        });
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Interactive Form
+        const inputForm = document.getElementById('inputForm');
+        const textInput = document.getElementById('textInput');
+        const textColorPicker = document.getElementById('textColorPicker');
+        const displayText = document.getElementById('displayText');
+
+        inputForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const inputtedText = textInput.value.trim();
+            const selectedColor = textColorPicker.value;
+            if (inputtedText !== '') {
+                displayText.textContent = inputtedText;
+                displayText.style.color = selectedColor;
+                textInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>

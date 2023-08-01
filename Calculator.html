@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Interactive Calculator</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            width: 250px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #5ad54f;
+            border-radius: 5px;
+        }
+
+        .calculator input {
+            grid-column: span 4;
+            padding: 5px;
+            font-size: 18px;
+            text-align: right;
+        }
+
+        .calculator button {
+            grid-column: span 1;
+            padding: 10px;
+            font-size: 18px;
+            background-color: #7ebbe8;
+            cursor: pointer;
+        }
+
+        .calculator button.operator {
+            background-color: #b45ef2;
+        }
+
+        /* Clear and Backspace buttons */
+        .calculator button:nth-child(2),
+        .calculator button:nth-child(3) {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" placeholder="0" readonly>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="backspace()">&#9003;</button>
+        <button onclick="appendOperator('+')" class="operator">+</button>
+        <button onclick="appendDigit('7')">7</button>
+        <button onclick="appendDigit('8')">8</button>
+        <button onclick="appendDigit('9')">9</button>
+        <button onclick="appendOperator('-')" class="operator">-</button>
+        <button onclick="appendDigit('4')">4</button>
+        <button onclick="appendDigit('5')">5</button>
+        <button onclick="appendDigit('6')">6</button>
+        <button onclick="appendOperator('*')" class="operator">*</button>
+        <button onclick="appendDigit('1')">1</button>
+        <button onclick="appendDigit('2')">2</button>
+        <button onclick="appendDigit('3')">3</button>
+        <button onclick="appendOperator('/')" class="operator">/</button>
+        <button onclick="appendDigit('0')">0</button>
+        <button onclick="appendDecimal('.')">.</button>
+        <button onclick="calculate()" class="operator">=</button>
+    </div>
+
+    <script>
+        let expression = '';
+
+        function updateDisplay() {
+            document.getElementById('display').value = expression;
+        }
+
+        function appendDigit(digit) {
+            expression += digit;
+            updateDisplay();
+        }
+
+        function appendOperator(operator) {
+            expression += ' ' + operator + ' ';
+            updateDisplay();
+        }
+
+        function appendDecimal(decimal) {
+            if (!expression.includes('.')) {
+                expression += decimal;
+                updateDisplay();
+            }
+        }
+
+        function clearDisplay() {
+            expression = '';
+            updateDisplay();
+        }
+
+        function backspace() {
+            expression = expression.slice(0, -1);
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                const result = eval(expression);
+                expression = result.toString();
+                updateDisplay();
+            } catch (error) {
+                expression = 'Error';
+                updateDisplay();
+            }
+        }
+    </script>
+</body>
+</html>
